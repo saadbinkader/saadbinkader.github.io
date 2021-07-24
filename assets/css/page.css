@@ -2,6 +2,25 @@
     color: #f17070;
 }
 
+.title-link {
+    color: #212529;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.title-link:hover {
+    color: #f17070;
+}
+
+.post-tag {
+    color: #f17070;
+}
+
+.pdfHolder {
+    width: 80%;
+    height: 800px;
+}
+
 .img-bottom-title {
     padding-left: 5px;
     width: 80%;

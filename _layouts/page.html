@@ -20,6 +20,19 @@
     <link rel="stylesheet" href="../assets/css/timeline.css">
     <link rel="stylesheet" href="../assets/css/transcript.css">
     <link rel="shortcut icon" href="../assets/images/favicon.png">
+
+    <script src="../assets/js/jquery-3.4.0.min.js"></script>
+      <script src="../assets/js/jquery-ui.min.js"></script>
+      <script src="../assets/js/slick.min.js"></script>
+      <script src="../assets/js/plyr.min.js"></script>
+      <script src="../assets/js/aos.js"></script>
+      <script src="../assets/js/jquery.scrollUp.min.js"></script>
+      <script src="../assets/js/masonry.pkgd.min.js"></script>
+      <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
+      <script src="../assets/js/numscroller-1.0.js"></script>
+      <script src="../assets/js/jquery.countdown.min.js"></script>
+      <script src="../assets/js/main.js"></script>
+      <script src="../assets/js/pdfobject/pdfobject.min.js"></script>
   </head>
   <body>
     <div id="main">
@@ -33,12 +46,12 @@
                   <nav class="navigation">
                     <ul>
                       <li class="nav-item"><a id="aboutLink" class="pisen-nav-link" href="/">About</a></li>
-                      <li class="nav-item"><a id="workLink" class="pisen-nav-link" href="work">Work</a></li>
-                      <li class="nav-item"><a id="academicsLink" class="pisen-nav-link" href="academics">Academics</a></li>
-                      <li class="nav-item"><a id="projectsLink" class="pisen-nav-link" href="projects">R&D</a></li>
-                      <li class="nav-item"><a id="resumeLink" class="pisen-nav-link" href="resume">Resume</a></li>
-                      <li class="nav-item"><a id="talksLink" class="pisen-nav-link" href="talks">Talks</a></li>
-                      <li class="nav-item"><a id="funLink" class="pisen-nav-link" href="fun">When not Working?</a></li>
+                      <li class="nav-item"><a id="workLink" class="pisen-nav-link" href="/work">Work</a></li>
+                      <li class="nav-item"><a id="academicsLink" class="pisen-nav-link" href="/academics">Academics</a></li>
+                      <li class="nav-item"><a id="projectsLink" class="pisen-nav-link" href="/projects">R&D</a></li>
+                      <li class="nav-item"><a id="resumeLink" class="pisen-nav-link" href="/resume">Resume</a></li>
+                      <li class="nav-item"><a id="talksLink" class="pisen-nav-link" href="/talks">Talks</a></li>
+                      <li class="nav-item"><a id="funLink" class="pisen-nav-link" href="/fun">When not Working?</a></li>
                     </ul>
                   </nav>
                 </div>
@@ -61,17 +74,6 @@
       {{ content }}
       <footer>
       </footer><!--End footer-->
-      <script src="../assets/js/jquery-3.4.0.min.js"></script>
-      <script src="../assets/js/jquery-ui.min.js"></script>
-      <script src="../assets/js/slick.min.js"></script>
-      <script src="../assets/js/plyr.min.js"></script>
-      <script src="../assets/js/aos.js"></script>
-      <script src="../assets/js/jquery.scrollUp.min.js"></script>
-      <script src="../assets/js/masonry.pkgd.min.js"></script>
-      <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
-      <script src="../assets/js/numscroller-1.0.js"></script>
-      <script src="../assets/js/jquery.countdown.min.js"></script>
-      <script src="../assets/js/main.js"></script>
       <script>
         $('#{{ page.linkId }}').last().addClass( 'active');
       </script>
