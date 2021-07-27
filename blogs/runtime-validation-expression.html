@@ -1,0 +1,146 @@
+---
+layout: page
+title: About
+css: <link rel="stylesheet" href="../assets/css/stackoverflow-light.min.css">
+js: <script src="../assets/js/highlight/highlight.min.js"></script><script id="MathJax-script" async src="../assets/js/math-jax-3.2.0/es5/tex-mml-chtml.js"></script>
+---
+
+<section class="posts blog-index">
+  <div class="container">
+    <div class="row justify-content-left">
+      <div class="col-12 col-md-12">
+        <div class="post-block post-classic">
+          <div class="post-detail">
+            <h3>Runtime Validation Using Mathematical Expression</h3>
+            <div class="post-credit">
+              <h5 class="upload-day">JANUARY 11, 2021</h5>
+              <div class="post-tag">#WORK</div>
+            </div>
+            <p>
+Coming up with comprehensive validation cases is challenging at development time, especially for configurable applications(e.g. custom data collectors). A potential solution could be treating the validation logics as mathematical expressions. A system for evaluating such mathematical expressions will enable users to add validation rules during the run time without needing an application rebuild.
+<br/>
+<br/>
+For example, if we consider a scenario with two inputs: start and end having a defined range, we can specify a rule as:
+<br/>
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>end</mi>
+  <mo>-</mo>
+  <mi>start</mi>
+  <mo>&le;</mo>
+  <mi>range</mi>
+</math>
+<br/>
+<br/>
+The nature of these rules is generic for most input types and can be added on-demand on runtime.
+<br/>
+<br/>
+Here is a sample implementation<i>(functional for only types: numerical and dates)</i> using
+<a class="content-link" target="_blank" href="http://mathparser.org/"><u>mXparser</u> <i class="fas fa-external-link-alt"></i></a>:
+<br/>
+<br/>
+<b>Class ExpressionValidator.java</b>
+<br/>
+<br/>
+<pre><code class="language-java">
+public class ExpressionValidator {
+
+  private static final String FUNCTION_PREFIX_DAY = "day";
+  private static final String FUNCTION_PREFIX_DATE = "date";
+
+  private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+  private static final Pattern PATTERN_FUNCTION_VALUE = Pattern.compile("[(][0-9/]*[)]");
+
+  private String expression;
+
+  public ExpressionValidator(String expression) {
+      this.expression = expression;
+  }
+
+  public boolean isValid(Map<String, String> params) {
+      Constant[] constants = params.entrySet().stream()
+              .map(entry -> getConstant(entry.getKey(), entry.getValue()))
+              .collect(Collectors.toList()).toArray(new Constant[0]);
+
+      return new Expression(this.expression, constants).calculate() > 0;
+  }
+
+  private Constant getConstant(String key, String value) {
+      try {
+          return new Constant(key + " = " + getEvaluatedValue(value));
+
+      } catch (ParseException e) {
+          throw new RuntimeException(e);
+      }
+  }
+
+  private String getEvaluatedValue(String subExpression) throws ParseException {
+      Matcher matcher = PATTERN_FUNCTION_VALUE.matcher(subExpression);
+
+      if (!matcher.find()) {
+          return subExpression;
+      }
+
+      String givenValue = subExpression.substring(matcher.start() + 1, matcher.end() - 1);
+
+      return subExpression.startsWith(FUNCTION_PREFIX_DATE) ? Long.toString(DATE_FORMAT.parse(givenValue).getTime())
+              : subExpression.startsWith(FUNCTION_PREFIX_DAY) ? Long.toString(Long.parseLong(givenValue) * 86400000)
+              : subExpression;
+  }
+}
+</code></pre>
+<br/>
+Rules like
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>start</mi>
+  <mo>&ge;</mo>
+  <mi>min</mi>
+</math>
+and
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>end</mi>
+  <mo>&le;</mo>
+  <mi>max</mi>
+</math>
+can be added without changing system at runtime.
+<br/>
+<br/>
+<b>Sample Run</b>
+<br/>
+<br/>
+<pre><code class="language-java">
+  Map<String, String> params = new HashMap<>();
+  ExpressionValidator expressionValidator = new ExpressionValidator("end - start <= range");
+
+  params.put("start", "55");
+  params.put("end", "100");
+  params.put("range", "50");
+
+  System.out.println(expressionValidator.isValid(params)); // true
+
+  params.put("start", "45");
+  params.put("end", "100");
+  params.put("range", "50");
+
+  System.out.println(expressionValidator.isValid(params)); // false
+
+  params.put("start", "date(06/01/2000)");
+  params.put("end", "date(15/01/2000)");
+  params.put("range", "day(10)");
+
+  System.out.println(expressionValidator.isValid(params)); // true
+
+  params.put("start", "date(02/01/2000)");
+  params.put("end", "date(15/01/2000)");
+  params.put("range", "day(10)");
+
+  System.out.println(expressionValidator.isValid(params)); // false
+</code></pre>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script>hljs.highlightAll();</script>
+</section><!--End posts-->
