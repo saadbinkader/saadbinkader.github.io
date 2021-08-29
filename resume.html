@@ -2,10 +2,14 @@
 layout: page
 title: Resume
 linkId: resumeLink
+js: <script src="./assets/js/pdfobject/pdfobject.min.js"></script>
 ---
 
 <section class="posts blog-index">
   <div class="container">
-    Coming soon!
+    <h3>Academic</h3>
+    <br/>
+    <div id="pdfView" class="pdfHolder"></div>
+    <script>PDFObject.embed("./assets/pdf/academic_resume.pdf", "#pdfView", {fallbackLink: "<p><a class='content-link' href='./assets/pdf/academic_resume.pdf'>Academic Resume</a></p>"});</script>
   </div>
 </section><!--End posts-->
