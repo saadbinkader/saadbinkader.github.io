@@ -7,9 +7,15 @@ js: <script src="./assets/js/pdfobject/pdfobject.min.js"></script>
 
 <section class="posts blog-index">
   <div class="container">
+    <h3>Professional</h3>
+    <br/>
+    <div id="pdfView1" class="pdfHolder"></div>
+    <script>PDFObject.embed("./assets/pdf/professional_resume.pdf", "#pdfView1", {fallbackLink: "<p><a class='content-link' href='./assets/pdf/professional_resume.pdf'>Professional Resume</a></p>"});</script>
+  </div>
+  <div class="container" style="padding-top: 50px">
     <h3>Academic</h3>
     <br/>
-    <div id="pdfView" class="pdfHolder"></div>
-    <script>PDFObject.embed("./assets/pdf/academic_resume.pdf", "#pdfView", {fallbackLink: "<p><a class='content-link' href='./assets/pdf/academic_resume.pdf'>Academic Resume</a></p>"});</script>
+    <div id="pdfView2" class="pdfHolder"></div>
+    <script>PDFObject.embed("./assets/pdf/academic_resume.pdf", "#pdfView2", {fallbackLink: "<p><a class='content-link' href='./assets/pdf/academic_resume.pdf'>Academic Resume</a></p>"});</script>
   </div>
 </section><!--End posts-->
